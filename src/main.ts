@@ -11,7 +11,7 @@ async function bootstrap() {
     .setTitle('Info Line')
     .setDescription("Description de l'API Info Line ")
     .setVersion('1.0')
-    .addTag('infoLine')
+    .addTag('InfoLine')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
