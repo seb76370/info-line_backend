@@ -7,9 +7,9 @@ export class LoginService {
     
     async login(body: Record<string,any>) {
         //TODO verifier login/mot de passe dans la base de donnée auprès des repository     
-        const userLoged = false
+        const userLoged = true
     if (userLoged) {
-        this.authService.auth(body)    
+        this.authService.createToken(body);    
     } else {
       throw new UnauthorizedException('Incorrect login credentials!');
     }

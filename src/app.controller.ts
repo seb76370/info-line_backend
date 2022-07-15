@@ -1,10 +1,15 @@
 import { Controller, Get, Headers, UnauthorizedException } from '@nestjs/common';
 import { log } from 'console';
 import { AppService } from './app.service';
+import { AuthService } from './auth/auth.service';
+
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly authservice: AuthService,
+  ) {}
 
   @Get()
   getHello(@Headers('Authorization') authorization = ''): string {
@@ -16,7 +21,12 @@ export class AppController {
     if (bearer === '') {
       throw new UnauthorizedException('No Token provided!');
     }
-    console.log(bearer);
+    try { this.authservice.isTokenValid(bearer)
     return this.appService.getHello();
+    } 
+    catch (error){ 
+        console.log(error);
+    }
+    
   }
 }
